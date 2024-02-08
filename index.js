@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -9,6 +10,13 @@ app.get('/', async (req, res) => {
   const stores = await Model.getStores();
   res.json(stores);
 });
+
+app.get('/store', async (req, res) => {
+  const {storeid} = req.query
+
+  const store = await Model.getStoreById(storeid)
+  res.json(store)
+})
 
 const server = async () => {
   await Model.connectDatabase();

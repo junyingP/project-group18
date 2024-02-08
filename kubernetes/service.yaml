@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-group18-service
+  namespace: jkpgcity
+spec:
+  selector:
+    app: project-group18
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000

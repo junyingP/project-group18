@@ -4,11 +4,15 @@
   "description": "The project is for the course Web Development Advanced Concepts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "docker build -t project-group18 . && docker tag project-group18 localhost:5000/project-group18 && docker push localhost:5000/project-group18",
+    "k8s:deploy":"kubectl apply -f kubernetes/namespace.yaml && kubectl apply -f kubernetes/deployment.yaml && kubectl apply -f kubernetes/service.yaml && kubectl rollout restart deployment project-group18 -n jkpgcity",
+    "k8s:run": "kubectl port-forward svc/project-group18-service 3000:3000 -n jkpgcity"
   },
   "author": "JP",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "pg": "^8.11.3"
   }

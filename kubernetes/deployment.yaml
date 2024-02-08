@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-group18-deployment
+  namespace: jkpgcity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-group18
+  template:
+    metadata:
+      labels:
+        app: project-group18
+    spec:
+      containers:
+      - name: project-group18
+        env:
+        - name: DB_HOST
+          value: "172.17.0.1"
+        image: localhost:5000/project-group18:latest
