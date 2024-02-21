@@ -6,7 +6,11 @@ const port = 3000;
 const ModelClass = require('./model.js');
 const Model = new ModelClass();
 
-app.get('/', async (req, res) => {
+let p = __dirname + '/public/'
+
+app.use(express.static(p))
+
+app.get('/stores', async (req, res) => {
   const stores = await Model.getStores();
   res.json(stores);
 });
