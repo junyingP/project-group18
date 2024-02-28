@@ -66,6 +66,11 @@ class ModelClass {
     return rows[0]
   }
 
+  async deleteStoreById(storeid) {
+    await this.connection.query(`
+      DELETE FROM stores WHERE id = $1
+    `, [storeid]);
+  }
 
 }
 

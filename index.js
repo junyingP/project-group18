@@ -22,6 +22,18 @@ app.get('/store', async (req, res) => {
   res.json(store)
 })
 
+app.delete('/store/:storeid', async (req, res) => {
+  const { storeid } = req.params; // Extracting store ID from the URL parameter
+
+  try {
+    await Model.deleteStoreById(storeid); // Calling the method to delete the store
+    res.status(200).json({ message: 'Store deleted successfully' }); // Sending a success response
+  } catch (error) {
+    console.error('Error deleting store:', error);
+    res.status(500).json({ error: 'Internal server error' }); // Sending an error response in case of failure
+  }
+})
+
 const server = async () => {
   await Model.connectDatabase();
   await Model.setupDatabase();
