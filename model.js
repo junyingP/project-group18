@@ -6,7 +6,8 @@ class ModelClass {
   constructor() {
     this.connection = new Pool({
       user: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST || 'localhost', //locally or with kubernetes
+      //host: 'host.docker.internal',
       database: 'postgres',
       password: '12345',
       port: 5432,
