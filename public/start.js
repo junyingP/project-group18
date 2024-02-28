@@ -22,16 +22,17 @@ fetch('http://localhost:3000/stores')
 });
 
 function removeStore(storeId) {
-    fetch(`http://localhost:3000/store/${storeId}`, { method: 'DELETE' })
-    .then(response => {
-        if (response.ok) {
-            console.log('Store removed successfully');
-            // Refresh the list of stores
-            fetchStores();
-        } else {
-            console.error('Failed to remove store');
-        }
-    })
+    if (confirm('Are you sure you want to delete this store?')) {
+        fetch(`http://localhost:3000/store/${storeId}`, { method: 'DELETE' })
+        .then(response => {
+            if (response.ok) {
+                console.log('Store removed successfully');
+                // Refresh the list of stores
+                fetchStores();
+            } else {
+                console.error('Failed to remove store');
+            }
+        })
     .catch(error => console.error('Error:', error));
 }
 
