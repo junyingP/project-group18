@@ -2,13 +2,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f0f2f5; /* Soft, light blue background for a fresh look */
-    color: #333; /* Keeping the text color mostly dark for readability */
+    background: linear-gradient(to bottom, #6dd5ed 0%, #2193b0 50%, #f0f2f5 100%);
+    color: #333;
 }
 
 h1 {
     text-align: center;
-    color: #007bff; /* Bright blue for the main title for a pop of color */
+    color: #007bff;
     margin-bottom: 2rem;
 }
 
@@ -19,34 +19,37 @@ h1 {
 }
 
 .store-item {
-    background: #ffffff; /* Pure white background for each store card */
+    /* Subtle gradient background for each store item */
+    background: linear-gradient(to bottom right, #ffffff, #e6f1ff);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .store-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* More pronounced shadow on hover for a 'lifting' effect */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    /* Slightly more pronounced gradient on hover for a dynamic effect */
+    background: linear-gradient(to bottom right, #e6f1ff, #cce0ff);
 }
 
 .store-item p {
     margin: 0 0 15px;
-    color: #555; /* Slightly lighter than body text for contrast within the card */
+    color: #555;
 }
 
 button {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b); /* Gradient button for a modern, energetic look */
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 20px; /* Rounded edges for a softer, more modern button */
+    border-radius: 20px;
     transition: background 0.3s ease-in-out, transform 0.2s ease;
 }
 
 button:hover {
-    background: linear-gradient(135deg, #ff4b2b, #ff416c); /* Invert gradient on hover for dynamic interaction */
-    transform: scale(1.05); /* Slightly enlarge the button on hover for feedback */
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+    transform: scale(1.05);
 }
