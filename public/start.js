@@ -34,6 +34,7 @@ function removeStore(storeId) {
             }
         })
     .catch(error => console.error('Error:', error));
+    }
 }
 
 // Refactored fetchStores into a separate function for reuse
