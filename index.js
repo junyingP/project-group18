@@ -9,6 +9,7 @@ const Model = new ModelClass();
 let p = __dirname + '/public/'
 
 app.use(express.static(p))
+app.use(express.json());
 
 app.get('/stores', async (req, res) => {
   const stores = await Model.getStores();
@@ -34,6 +35,29 @@ app.delete('/store/:storeid', async (req, res) => {
   }
 })
 
+// Example Express route for adding a store
+app.post('/stores', async (req, res) => {
+  try {
+    const { name } = req.body; // Ensure this matches the data structure sent from the client
+    await Model.addStore({ name });
+    res.status(201).json({ message: 'Store added successfully' });
+  } catch (error) {
+    console.error('Error adding store:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.put('/store/:storeid', async (req, res) => {
+  const { storeid } = req.params; // Extracting store ID from the URL parameter
+  try {
+    await Model.updateStoreById(storeid, req.body); // req.body contains the updated store data from the client
+    res.status(200).json({ message: 'Store updated successfully' });
+  } catch (error) {
+    console.error('Error updating store:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 const server = async () => {
   await Model.connectDatabase();
   await Model.setupDatabase();
@@ -45,40 +69,3 @@ const server = async () => {
 
 server();
 
-/*
-app.get('/', function (req, res) {
-  const { storename } = req.query
-  console.log(storename)
-  const index = stores.findIndex(store => store.name === storename)
-  if (index > -1) {
-    res.json(stores[index])
-  } else {
-    res.send('Store not found!')
-  }
-})
-
-app.delete('/', function (req, res) {
-  const { storename } = req.query
-  console.log(storename)
-  const index = stores.findIndex(store => store.name === storename)
-  if (index > -1) {
-    stores.splice(index, 1)
-    res.send(`Store found! Deleting store with index: ${index}`)
-  } else {
-    res.send('Store not found!')
-  }
-})
-
-app.post('/',
-  express.json(), // for parsing application/json body in POST
-  (req, res) => {
-    const { body } = req
-    console.log(body)
-    stores.push(body)
-    res.send('Store added!')
-})
-
-app.listen(3000, () => {
-  console.log('Server is running at port 3000')
-})
-*/

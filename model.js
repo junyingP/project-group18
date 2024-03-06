@@ -73,6 +73,23 @@ class ModelClass {
     `, [storeid]);
   }
 
+  async addStore(storeData) {
+    const { name, url, district, rating } = storeData;
+    await this.connection.query(`
+      INSERT INTO stores (name, url, district, rating)
+      VALUES ($1, $2, $3, $4)
+    `, [name, url, district, rating]);
+  }
+
+  async updateStoreById(storeid, storeData) {
+    const { name, url, district, rating } = storeData;
+    await this.connection.query(`
+      UPDATE stores
+      SET name = $1, url = $2, district = $3, rating = $4
+      WHERE id = $5
+    `, [name, url, district, rating, storeid]);
+  }
+
 }
 
 module.exports = ModelClass;
