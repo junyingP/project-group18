@@ -20,6 +20,16 @@ class ModelClass {
 
   async setupDatabase() {
     await this.connection.query(`
+        ALTER TABLE public.stores
+        ADD COLUMN IF NOT EXISTS address TEXT;
+    `);
+
+    await this.connection.query(`
+        ALTER TABLE public.stores
+        ADD COLUMN IF NOT EXISTS opening_hours TEXT;
+    `);
+
+    await this.connection.query(`
     CREATE TABLE IF NOT EXISTS public.stores
     (
         id SERIAL,
@@ -27,8 +37,11 @@ class ModelClass {
         url text,
         district text,
         rating integer,
+        address TEXT,            
+        opening_hours TEXT,   
         CONSTRAINT stores_pkey PRIMARY KEY (id)
     )`);
+    
 
     await this.connection.query(`
       ALTER TABLE IF EXISTS public.stores
@@ -45,9 +58,9 @@ class ModelClass {
       if (rows.length === 0) {
         console.log(`Inserting ${store.name}`);
         await this.connection.query(`
-          INSERT INTO stores (name, url, district)
-          VALUES ($1, $2, $3)
-        `, [store.name, store.url, store.district]);
+          INSERT INTO stores (name, url, district, rating, address, opening_hours)
+          VALUES ($1, $2, $3, $4, $5, $6)
+        `, [store.name, store.url, store.district, store.rating, store.address, store.opening_hours]);
       }
     }
   }
@@ -74,21 +87,21 @@ class ModelClass {
   }
 
   async addStore(storeData) {
-    const { name, url, district, rating } = storeData;
+    const { name, url, district, rating, address, opening_hours} = storeData;
     await this.connection.query(`
-      INSERT INTO stores (name, url, district, rating)
-      VALUES ($1, $2, $3, $4)
-    `, [name, url, district, rating]);
+      INSERT INTO stores (name, url, district, rating, address, opening_hours)
+      VALUES ($1, $2, $3, $4, $5, $6)
+    `, [name, url, district, rating, address, opening_hours]);
   }
 
   async updateStoreById(storeid, storeData) {
-    const { name, url, district, rating } = storeData;
+    const { name, url, district, rating, address, opening_hours } = storeData;
     await this.connection.query(`
-      UPDATE stores
-      SET name = $1, url = $2, district = $3, rating = $4
-      WHERE id = $5
-    `, [name, url, district, rating, storeid]);
-  }
+        UPDATE stores
+        SET name = $1, url = $2, district = $3, rating = $4, address = $5, opening_hours = $6
+        WHERE id = $7
+    `, [name, url, district, rating, address, opening_hours, storeid]);
+}
 
 }
 

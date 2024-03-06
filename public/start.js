@@ -9,7 +9,7 @@ function fetchStores() {
 
 function displayStores(storesToDisplay) {
     const storesContainer = document.getElementById('stores-container');
-    storesContainer.innerHTML = ''; // Clear the container
+    storesContainer.innerHTML = '';
 
     storesToDisplay.forEach(store => {
         const storeDiv = document.createElement('div');
@@ -17,7 +17,9 @@ function displayStores(storesToDisplay) {
         storeDiv.innerHTML = `
             <p>Name: ${store.name}</p>
             <p>District: ${store.district}</p>
-            <p>Website: <a href="${store.url}" target="_blank" rel="noopener noreferrer">Visit Website</a></p>
+            <p>URL: <a href="${store.url}" target="_blank" rel="noopener noreferrer">Visit Website</a></p>
+            <p>Address: ${store.address || 'N/A'}</p>
+            <p>Opening Hours: ${store.opening_hours || 'N/A'}</p>
             <button onclick="editStore(${store.id})" class="edit-button">Edit</button>
             <button onclick="removeStore(${store.id})" class="remove-button">Remove</button>
         `;
@@ -64,28 +66,32 @@ function editStore(storeId) {
     }
 }
 
-// Function to add a new store
 function addStore() {
-    console.log("Add Store button clicked");
-    const storeName = prompt('Enter the name of the new store:');
-    if (storeName) {
-        fetch('/stores', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: storeName })
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Store added successfully');
-                fetchStores(); // Refresh the list of stores
-            } else {
-                console.error('Failed to add store');
-            }
-        })
-        .catch(error => console.error('Error adding store:', error));
-    }
+    const storeData = {
+        name: document.getElementById('name').value,
+        url: document.getElementById('url').value,
+        district: document.getElementById('district').value,
+        rating: parseInt(document.getElementById('rating').value || '0', 10),
+        address: document.getElementById('address').value, // Assuming you have an input field for address
+        opening_hours: document.getElementById('opening_hours').value // Assuming you have an input field for opening hours
+    };
+
+    fetch('/stores', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(storeData)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Store added successfully');
+            fetchStores(); // Refresh the list of stores
+        } else {
+            console.error('Failed to add store');
+        }
+    })
+    .catch(error => console.error('Error adding store:', error));
 }
 
 // Function to sort stores
@@ -108,9 +114,24 @@ function sortStores() {
     .catch(error => console.error('Error sorting stores:', error));
 }
 
-// Attach event listeners to Add and Sort buttons after DOM content is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('add-store').addEventListener('click', addStore);
-    document.getElementById('sort-stores').addEventListener('click', sortStores);
+    // Event listener for form submission
+    const addForm = document.getElementById('add-store-form');
+    if (addForm) {
+        addForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            addStore();
+        });
+    }
+    
+    // Event listener for sorting stores
+    const sortButton = document.getElementById('sort-stores');
+    if (sortButton) {
+        sortButton.addEventListener('click', sortStores);
+    } else {
+        console.error('Sort button not found');
+    }
+
     fetchStores(); // Initial fetch of stores
 });
+
