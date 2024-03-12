@@ -38,8 +38,8 @@ app.delete('/store/:storeid', async (req, res) => {
 // Example Express route for adding a store
 app.post('/stores', async (req, res) => {
   try {
-    const { name } = req.body; // Ensure this matches the data structure sent from the client
-    await Model.addStore({ name });
+    const { name, url, district, address, opening_hours } = req.body; // Extract all properties
+    await Model.addStore({ name, url, district, address, opening_hours }); // Pass all properties to the model
     res.status(201).json({ message: 'Store added successfully' });
   } catch (error) {
     console.error('Error adding store:', error);
