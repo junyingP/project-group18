@@ -43,24 +43,34 @@ function removeStore(storeId) {
     }
 }
 
-// Function to edit a store
 function editStore(storeId) {
     const newName = prompt('Enter the new name for the store:');
     if (newName) {
-        fetch(`/store/${storeId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: newName })
-        })
+      // Prepare the updated store data
+      const updatedStoreData = {
+        name: newName,
+        // Include additional properties for editable values
+        url: prompt('Enter the new URL:'), // Prompt for URL
+        district: prompt('Enter the new district:'), // Prompt for district
+        address: prompt('Enter the new address:'), // Prompt for address
+        opening_hours: prompt('Enter the new opening hours:'), // Prompt for opening hours
+      };
+  
+      // Update the store using PUT request
+      fetch(`/store/${storeId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedStoreData),
+      })
         .then(response => {
-            if (response.ok) {
-                console.log('Store updated successfully');
-                fetchStores(); // Refresh the list
-            } else {
-                console.error('Failed to update store');
-            }
+          if (response.ok) {
+            console.log('Store updated successfully');
+            fetchStores(); // Refresh the list of stores
+          } else {
+            console.error('Failed to update store');
+          }
         })
         .catch(error => console.error('Error updating store:', error));
     }
@@ -71,7 +81,6 @@ function addStore() {
         name: document.getElementById('name').value,
         url: document.getElementById('url').value,
         district: document.getElementById('district').value,
-        rating: parseInt(document.getElementById('rating').value || '0', 10),
         address: document.getElementById('address').value, // Assuming you have an input field for address
         opening_hours: document.getElementById('opening_hours').value // Assuming you have an input field for opening hours
     };
