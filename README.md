@@ -14,7 +14,7 @@ Download and install Docker Desktop:
 
 ### 2. Create .env file
 
-#### Inside the root G8-Backend/ directory, create a .env file with the following content:
+Inside the root G8-Backend/ directory, create a .env file with the following content:
 
     # MySQL
     MYSQL_ROOT_PASSWORD=*****
@@ -42,7 +42,7 @@ Download and install Docker Desktop:
 
 ### ▶️ Start the Docker Containers in the development environment
 
-#### From the root G8-Backend/ directory:
+From the root G8-Backend/ directory:
 
     docker-compose up --build
 
@@ -50,13 +50,13 @@ Download and install Docker Desktop:
 
     docker-compose down
 
-#### To also remove volumes and reset the database (⚠️ destructive):
+To also remove volumes and reset the database (⚠️ destructive):
 
     docker-compose down -v
 
 ## ➕ Installing Additional Packages
 
-#### To install a new package for the REST API:
+To install a new package for the REST API:
 
     cd ./rest-api/
     npm install <package-name>
