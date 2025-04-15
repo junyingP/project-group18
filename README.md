@@ -31,11 +31,11 @@ Inside the root G8-Backend/ directory, create a .env file with the following con
 
 ### ✅ Initial Setup
 
-1. Navigate into the rest-api/ directory:
+#### 1. Navigate into the rest-api/ directory:
 
     cd ./rest-api/
 
-2. Install dependencies:
+#### 2. Install dependencies:
 
     npm install
 
