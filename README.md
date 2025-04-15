@@ -36,24 +36,20 @@ Inside the root G8-Backend/ directory, create a .env file with the following con
 
 From the root G8-Backend/ directory:
 
-    ```bash
     docker-compose up --build
 
 ⏹️ Stop All Containers
 
-    ```bash
     docker-compose down
 
 To also remove volumes and reset the database (⚠️ destructive):
 
-    ```bash
     docker-compose down -v
 
 ➕ Installing Additional Packages
 
 To install a new package for the REST API:
 
-    ```bash
     cd ./rest-api/
     npm install <package-name>
 
