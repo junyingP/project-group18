@@ -4,13 +4,16 @@ The project is for the course Web Development Advanced Concepts
 This is the backend for the G8 project, built with Node.js and Express, and containerized with Docker. It includes a REST API, a WebSocket server, and a MySQL database.
 
 ## 📦 Prerequisites
+
 ### 1. Install Docker
-    Download and install Docker Desktop:
-    👉 https://www.docker.com/products/docker-desktop/
+
+Download and install Docker Desktop:
+👉 https://www.docker.com/products/docker-desktop/
 
 ### 2. Create .env file
+
 Inside the root G8-Backend/ directory, create a .env file with the following content:
-    ```env
+
     # MySQL
     MYSQL_ROOT_PASSWORD=*****
     MYSQL_DATABASE=lawnmower
@@ -22,12 +25,15 @@ Inside the root G8-Backend/ directory, create a .env file with the following con
     DB_NAME=lawnmower
 
 ## 🚀 Starting and Stopping the Project
+
 ### ✅ Initial Setup
+
 1. Navigate into the rest-api/ directory:
-    ```bash
+    
     cd ./rest-api/
+
 2. Install dependencies:
-    ```bash
+    
     npm install
 
 ## 🐳 Docker Commands
