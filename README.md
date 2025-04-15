@@ -10,12 +10,11 @@ This is the backend for the G8 project, built with Node.js and Express, and cont
 ### 1. Install Docker
 
 Download and install Docker Desktop:
-
 👉 https://www.docker.com/products/docker-desktop/
 
 ### 2. Create .env file
 
-Inside the root G8-Backend/ directory, create a .env file with the following content:
+#### Inside the root G8-Backend/ directory, create a .env file with the following content:
 
     # MySQL
     MYSQL_ROOT_PASSWORD=*****
@@ -43,7 +42,7 @@ Inside the root G8-Backend/ directory, create a .env file with the following con
 
 ### ▶️ Start the Docker Containers in the development environment
 
-From the root G8-Backend/ directory:
+#### From the root G8-Backend/ directory:
 
     docker-compose up --build
 
@@ -51,13 +50,13 @@ From the root G8-Backend/ directory:
 
     docker-compose down
 
-To also remove volumes and reset the database (⚠️ destructive):
+#### To also remove volumes and reset the database (⚠️ destructive):
 
     docker-compose down -v
 
 ## ➕ Installing Additional Packages
 
-To install a new package for the REST API:
+#### To install a new package for the REST API:
 
     cd ./rest-api/
     npm install <package-name>
