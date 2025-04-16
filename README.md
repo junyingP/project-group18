@@ -54,6 +54,30 @@ To also remove volumes and reset the database (⚠️ destructive):
 
     docker-compose down -v
 
+## 📂 Database
+
+### 📁 Migrations & Seeds
+
+This project uses Knex.js to manage database migrations and seed data.
+
+Make sure the database is running via Docker before executing any of the following commands
+
+#### 💡 Note: Make sure to run the following commands inside the rest-api folder:
+
+    cd ./rest-api/
+
+### 📦 Running Migrations
+
+    npm run migrate
+
+### 🧱 Rolling Back Migrations
+
+    npm run rollback
+
+### 🌱 Seeding the Database
+
+    npm run seed
+
 ## ➕ Installing Additional Packages
 
 To install a new package for the REST API:
